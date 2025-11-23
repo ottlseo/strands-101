@@ -31,6 +31,8 @@ TOOL_SPEC = {
 
 class Colors:
     GREEN = '\033[92m'
+    BLUE = '\033[94m'
+    YELLOW = '\033[93m'
     RED = '\033[91m'
     END = '\033[0m'
 
@@ -44,6 +46,8 @@ def handle_bash_tool(cmd: Annotated[str, "The bash command to be executed."]):
     )
     with tracer.start_as_current_span("bash_tool") as span:
         print()  # Add newline before log
+        print(f"{Colors.GREEN}===== Executing Bash command ====={Colors.END}")
+        print(f"{Colors.BLUE}{cmd}{Colors.END}")
         logger.info(f"\n{Colors.GREEN}Executing Bash: {cmd}{Colors.END}")
         try:
             # Execute the command and capture output
@@ -52,6 +56,10 @@ def handle_bash_tool(cmd: Annotated[str, "The bash command to be executed."]):
             )
             # Return stdout as the result
             results = "||".join([cmd, result.stdout])
+
+            print(f"{Colors.YELLOW}Output:{Colors.END}")
+            print(result.stdout)
+            print(f"{Colors.GREEN}===== Command execution successful ====={Colors.END}")
 
             return results + "\n"
             

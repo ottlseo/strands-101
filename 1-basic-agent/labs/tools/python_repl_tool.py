@@ -65,6 +65,8 @@ def handle_python_repl_tool(code: Annotated[str, "The python code to execute to 
     you should print it out with `print(...)`. This is visible to the user.
     """
     print()  # Add newline before log
+    print(f"{Colors.GREEN}===== Executing Python code ====={Colors.END}")
+    print(f"{Colors.BLUE}{code}{Colors.END}")
     logger.info(f"{Colors.GREEN}===== Executing Python code ====={Colors.END}")
     try:
         result = repl.run(code)
@@ -82,6 +84,7 @@ def handle_python_repl_tool(code: Annotated[str, "The python code to execute to 
         code_summary = code
 
     result_str = f"Successfully executed:\n||{code_summary}||{result}"
+    print(f"{Colors.GREEN}===== Code execution successful ====={Colors.END}")
     logger.info(f"{Colors.GREEN}===== Code execution successful ====={Colors.END}")
     return result_str
 
