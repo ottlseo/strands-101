@@ -209,6 +209,7 @@ __marimo__/
 # Data and Artifacts (root only)
 /artifacts/
 /data/
+/reference/
 
 # macOS
 .DS_Store
