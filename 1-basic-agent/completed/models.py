@@ -18,4 +18,3 @@ if __name__ == "__main__":
     user_input = "Amazon Bedrock이 뭐야?"
 
     response = agent(user_input) 
-    print(response)
