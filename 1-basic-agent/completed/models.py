@@ -20,3 +20,15 @@ if __name__ == "__main__":
 
     response = agent(user_input)
     
+    print("\n\n")
+    print("=========================================")
+    print("=========================================\n")
+
+    last_msg = agent.messages[-1]
+    for content in last_msg['content']:
+        if 'reasoningContent' in content:
+            print("\n ==== REASONING ==== \n")
+            print(content['reasoningContent']['reasoningText']['text'])
+        elif 'text' in content:
+            print("\n ==== RESPONSE ==== \n")
+            print(content['text'])

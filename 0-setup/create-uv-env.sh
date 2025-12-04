@@ -159,6 +159,42 @@ print_info "시스템 패키지 설치 중..."
 sudo apt-get update
 sudo apt-get install -y pandoc texlive texlive-xetex poppler-utils
 
+# Node.js 및 npm 설치
+print_info "Node.js 및 npm 설치 확인 중..."
+if ! command -v node &> /dev/null; then
+    print_warning "Node.js가 설치되어 있지 않습니다."
+
+    # macOS의 경우
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        if command -v brew &> /dev/null; then
+            print_info "Homebrew를 사용하여 Node.js를 설치합니다..."
+            brew install node
+        else
+            print_warning "Homebrew가 설치되어 있지 않습니다."
+            print_info "Node.js를 수동으로 설치해주세요: https://nodejs.org/"
+        fi
+    # Linux의 경우
+    else
+        print_info "NodeSource를 통해 Node.js LTS를 설치합니다..."
+        curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+        sudo apt-get install -y nodejs
+    fi
+
+    # 설치 확인
+    if command -v node &> /dev/null; then
+        print_success "Node.js가 성공적으로 설치되었습니다!"
+        node --version
+        npm --version
+    else
+        print_warning "Node.js 설치에 실패했습니다. 수동으로 설치해주세요."
+        print_info "설치 URL: https://nodejs.org/"
+    fi
+else
+    print_success "Node.js가 이미 설치되어 있습니다."
+    node --version
+    npm --version
+fi
+
 # 5. Jupyter 커널 등록
 print_info "Jupyter 커널 등록 중..."
 DISPLAY_NAME="$ENV_NAME (UV)"
