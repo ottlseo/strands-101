@@ -270,7 +270,7 @@ if ! step_completed "workspace_initialized"; then
         echo "INFO: Cloning from GitHub..."
         if su - ec2-user -c "
             cd /home/ec2-user/workspace && \
-            git clone ${GITHUB_REPO} my-workspace && \
+            git clone -b ${GITHUB_BRANCH} ${GITHUB_REPO} my-workspace && \
             cd my-workspace && \
             git remote remove origin && \
             git remote add origin s3+zip://${S3_BUCKET_GIT}/my-workspace && \
