@@ -260,7 +260,7 @@ if ! step_completed "workspace_initialized"; then
             git add . && \
             git commit -m 'Initial commit from S3 assets' && \
             git remote add origin s3+zip://${S3_BUCKET_GIT}/my-workspace && \
-            git push -u origin main
+            git push -u origin ${GITHUB_BRANCH}
         "; then
             mark_step_completed "workspace_initialized"
         else
@@ -274,7 +274,7 @@ if ! step_completed "workspace_initialized"; then
             cd my-workspace && \
             git remote remove origin && \
             git remote add origin s3+zip://${S3_BUCKET_GIT}/my-workspace && \
-            git push -u origin main
+            git push -u origin ${GITHUB_BRANCH}
         "; then
             mark_step_completed "workspace_initialized"
         else
