@@ -1,8 +1,4 @@
-"""
-STM 기본 사용법 - 세션 내 대화 기억
-"""
 import os
-from datetime import datetime
 from strands import Agent
 from bedrock_agentcore.memory.integrations.strands.config import AgentCoreMemoryConfig
 from bedrock_agentcore.memory.integrations.strands.session_manager import AgentCoreMemorySessionManager
@@ -21,13 +17,10 @@ memory_config = AgentCoreMemoryConfig(
     actor_id=ACTOR_ID
 )
 
-# 세션 매니저 생성
 session_manager = AgentCoreMemorySessionManager(
-    agentcore_memory_config=memory_config,
-    region_name="us-west-2"
+    agentcore_memory_config=memory_config
 )
 
-# 메모리가 연결된 에이전트 생성
 agent = Agent(
     system_prompt="당신은 친절한 어시스턴트입니다. 사용자와의 대화를 기억하고 맥락에 맞게 응답하세요.",
     session_manager=session_manager
@@ -37,9 +30,7 @@ if __name__ == "__main__":
     # 첫 번째 대화
     print("=== 첫 번째 대화 ===")
     response1 = agent("안녕하세요! 제 이름은 Alice이고, 피자를 좋아해요.")
-    print(f"Agent: {response1}\n")
     
     # 두 번째 대화 - 이전 대화를 기억하는지 확인
     print("=== 두 번째 대화 ===")
     response2 = agent("제 이름이 뭐라고 했죠? 그리고 제가 좋아하는 음식은요?")
-    print(f"Agent: {response2}\n")

@@ -155,9 +155,7 @@ else
     print_warning "install_korean_font.sh를 찾을 수 없습니다. 건너뜁니다."
 fi
 
-print_info "시스템 패키지 설치 중..."
-sudo apt-get update
-sudo apt-get install -y pandoc texlive texlive-xetex poppler-utils
+print_info "시스템 패키지 설치 중..."aws bedrock-agentcore-control list-memories
 
 # Node.js 및 npm 설치
 print_info "Node.js 및 npm 설치 확인 중..."
@@ -177,7 +175,7 @@ if ! command -v node &> /dev/null; then
     else
         print_info "NodeSource를 통해 Node.js LTS를 설치합니다..."
         curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-        sudo apt-get install -y nodejs
+        sudo dnf install -y nodejs
     fi
 
     # 설치 확인

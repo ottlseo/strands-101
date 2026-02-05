@@ -38,4 +38,3 @@ if __name__ == "__main__":
     
     agent = create_agent_with_memory(args.session, args.actor)
     response = agent(args.message)
-    print(f"Agent: {response}")
