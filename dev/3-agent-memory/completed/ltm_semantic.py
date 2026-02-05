@@ -1,7 +1,6 @@
-"""
-LTM Semantic Memory 전략 - 사실 정보 추출 및 저장
-"""
 import os
+import argparse
+import uuid
 from strands import Agent
 from bedrock_agentcore.memory.integrations.strands.config import (
     AgentCoreMemoryConfig,
@@ -19,50 +18,39 @@ retrieval_config = {
     )
 }
 
-memory_config = AgentCoreMemoryConfig(
-    memory_id=MEMORY_ID,
-    session_id="ltm_session_001",
-    actor_id="user_charlie",
-    retrieval_config=retrieval_config
-)
+def create_agent(session_id: str, actor_id: str) -> Agent:
+    """메모리가 연결된 에이전트 생성"""
 
-session_manager = AgentCoreMemorySessionManager(
-    agentcore_memory_config=memory_config,
-    region_name="us-west-2"
-)
-
-agent = Agent(
-    system_prompt="""당신은 사용자에 대해 학습하는 어시스턴트입니다.
-    대화에서 중요한 사실을 기억하고, 이전에 학습한 정보를 활용하여 응답하세요.""",
-    session_manager=session_manager
-)
-
-if __name__ == "__main__":
-    # 사실 정보 제공
-    print("=== 사실 학습 ===")
-    response1 = agent("저는 Charlie입니다. 소프트웨어 엔지니어로 일하고 있고, Python을 주로 사용해요.")
-    print(f"Agent: {response1}\n")
-    
-    # 다른 세션에서 기억하는지 테스트
-    print("=== 새 세션에서 테스트 ===")
-    
-    # 새 세션으로 에이전트 재생성
-    new_config = AgentCoreMemoryConfig(
+    print(f"Session ID: {session_id} | Actor ID: {actor_id}")
+    memory_config = AgentCoreMemoryConfig(
         memory_id=MEMORY_ID,
-        session_id="ltm_session_002",  # 다른 세션
-        actor_id="user_charlie",       # 같은 사용자
+        session_id=session_id,
+        actor_id=actor_id,
         retrieval_config=retrieval_config
     )
     
-    new_session_manager = AgentCoreMemorySessionManager(
-        agentcore_memory_config=new_config,
-        region_name="us-west-2"
+    session_manager = AgentCoreMemorySessionManager(
+        agentcore_memory_config=memory_config,
     )
-    
-    new_agent = Agent(
-        system_prompt="당신은 사용자에 대해 학습하는 어시스턴트입니다.",
-        session_manager=new_session_manager
+
+    return Agent(
+        system_prompt="""당신은 사용자에 대해 학습하는 어시스턴트입니다.
+        대화에서 중요한 사실을 기억하고, 이전에 학습한 정보를 활용하여 응답하세요.""",
+        session_manager=session_manager
     )
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--mode", choices=["learn", "retrieve"], required=True,
+                        help="learn: 사실 학습, retrieve: 학습된 사실 검색")
+    parser.add_argument("--actor", default="user_charlie")
+    parser.add_argument("--message", required=True)
+    args = parser.parse_args()
     
-    response2 = new_agent("제가 무슨 일을 한다고 했죠?")
-    print(f"Agent: {response2}")
+    # 매 실행마다 새로운 세션 ID 생성 (LTM이 세션 간 지속되는지 검증)
+    session_id = f"session_{uuid.uuid4().hex[:8]}"
+    agent = create_agent(session_id, args.actor)
+    agent(args.message)
+    
+    if args.mode == "learn":
+        print("\n💡 LTM 생성은 비동기입니다. 1-2분 후 retrieve 모드로 테스트하세요.")

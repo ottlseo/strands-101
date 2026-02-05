@@ -45,7 +45,6 @@ def create_agent_with_memory():
     
     session_manager = AgentCoreMemorySessionManager(
         agentcore_memory_config=memory_config,
-        region_name="us-west-2"
     )
     
     return Agent(
