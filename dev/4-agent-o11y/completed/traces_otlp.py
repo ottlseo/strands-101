@@ -20,7 +20,7 @@ strands_telemetry.setup_meter(
 
 # 에이전트 생성 (커스텀 속성 포함)
 agent = Agent(
-    model="apac.anthropic.claude-sonnet-4-20250514-v1:0",
+    model="us.anthropic.claude-sonnet-4-20250514-v1:0",
     system_prompt="당신은 도움이 되는 AI 어시스턴트입니다.",
     tools=[calculator],
     trace_attributes={
