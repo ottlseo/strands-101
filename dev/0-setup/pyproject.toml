@@ -13,7 +13,7 @@ dependencies = [
     "boto3>=1.40.51",
     "awscli>=1.42.10",
     "sagemaker>=2.252.0",
-    "strands-agents==1.14.0",
+    "strands-agents[otel]==1.25.0",
     "mcp==1.13.0",
     "streamlit==1.48.1",
     "requests-toolbelt==1.0.0",
@@ -35,5 +35,5 @@ dependencies = [
     "fpdf2==2.8.4",
     "matplotlib-inline==0.1.7",
     "strands-agents-tools==0.2.11",
-    "bedrock-agentcore[strands-agents]==1.2.1",
+    "bedrock-agentcore[strands-agents]==1.2.1"
 ]
