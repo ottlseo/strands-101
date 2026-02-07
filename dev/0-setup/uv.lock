@@ -801,7 +801,7 @@ requires-dist = [
     { name = "sagemaker", specifier = ">=2.252.0" },
     { name = "scikit-learn", specifier = "==1.7.1" },
     { name = "seaborn", specifier = "==0.13.2" },
-    { name = "strands-agents", extras = ["otel"], specifier = "==1.14.0" },
+    { name = "strands-agents", extras = ["otel"], specifier = "==1.25.0" },
     { name = "strands-agents-tools", specifier = "==0.2.11" },
     { name = "streamlit", specifier = "==1.48.1" },
     { name = "termcolor", specifier = "==3.1.0" },
@@ -3709,7 +3709,7 @@ wheels = [
 
 [[package]]
 name = "strands-agents"
-version = "1.14.0"
+version = "1.25.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "boto3" },
@@ -3724,9 +3724,9 @@ dependencies = [
     { name = "typing-extensions" },
     { name = "watchdog" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/26/dd/a2dc96614bb1dd7c1623cbdf6df268eb307038b2fe27bc5a6148f4223f59/strands_agents-1.14.0.tar.gz", hash = "sha256:f86dd2b92d50196acd0c5ff5404fcd1b6c3715ae56fcceb2a78210ab47860585", size = 471216, upload-time = "2025-10-29T14:20:27.721Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/89/30/1b437b74d1854c9704fa3a59390bddf71c158425a76088c8b94f620756ea/strands_agents-1.25.0.tar.gz", hash = "sha256:831a91d38d82f2051efb3d2ad013b4d6d2bbdad2353421796371a7e94503bc59", size = 697397, upload-time = "2026-02-05T20:05:30.275Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/8f/08/848c26d917d8f75bc10edeea63578af218df5c6efeb69e3cf91eb8fd396e/strands_agents-1.14.0-py3-none-any.whl", hash = "sha256:d2ebc1b991c37e891cfe79cf5dea1bfa021c3e6d93e4d2f238042ea688019bf3", size = 238974, upload-time = "2025-10-29T14:20:24.841Z" },
+    { url = "https://files.pythonhosted.org/packages/05/52/f07b14af7d71c467999ebb7f6c5ccc681cbd579a3993def21dd9b3507564/strands_agents-1.25.0-py3-none-any.whl", hash = "sha256:16b3a6331c8a1a8a79a249202c591a9cd2d777893371bcd8c12e458ada23587c", size = 345783, upload-time = "2026-02-05T20:05:28.023Z" },
 ]
 
 [package.optional-dependencies]
