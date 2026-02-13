@@ -36,4 +36,5 @@ dependencies = [
     "matplotlib-inline==0.1.7",
     "strands-agents-tools==0.2.11",
     "bedrock-agentcore[strands-agents]==1.2.1",
+    "bedrock-agentcore-starter-toolkit>=0.1.0",
 ]
