@@ -2,7 +2,7 @@ import json
 import uuid
 import boto3
 
-agent_arn = "<배포 시 출력된 ARN을 입력하세요>"
+agent_arn = "<배포 시 출력된 Endpoint ARN을 입력하세요>"
 prompt = "125 * 37은 얼마야?"
 
 client = boto3.client('bedrock-agentcore')
@@ -13,7 +13,6 @@ response = client.invoke_agent_runtime(
     agentRuntimeArn=agent_arn,
     runtimeSessionId=str(uuid.uuid4()),
     payload=payload,
-    qualifier="DEFAULT"
 )
 
 content = []
