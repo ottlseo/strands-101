@@ -1,0 +1,54 @@
+default_agent: strands_workshop_agent
+agents:
+  strands_workshop_agent:
+    name: strands_workshop_agent
+    entrypoint: /home/ec2-user/workspace/my-workspace/dev/5-agentcore-runtime/completed/my_agent.py
+    deployment_type: container
+    runtime_type: null
+    platform: linux/arm64
+    container_runtime: docker
+    source_path: null
+    aws:
+      execution_role: arn:aws:iam::487498333664:role/AmazonBedrockAgentCoreSDKRuntime-us-west-2-a4e6d6200c
+      execution_role_auto_create: false
+      account: '487498333664'
+      region: us-west-2
+      ecr_repository: 487498333664.dkr.ecr.us-west-2.amazonaws.com/bedrock-agentcore-strands_workshop_agent
+      ecr_auto_create: false
+      s3_path: null
+      s3_auto_create: false
+      network_configuration:
+        network_mode: PUBLIC
+        network_mode_config: null
+      protocol_configuration:
+        server_protocol: HTTP
+      observability:
+        enabled: true
+      lifecycle_configuration:
+        idle_runtime_session_timeout: null
+        max_lifetime: null
+    bedrock_agentcore:
+      agent_id: strands_workshop_agent-bTlwaUDNgX
+      agent_arn: arn:aws:bedrock-agentcore:us-west-2:487498333664:runtime/strands_workshop_agent-bTlwaUDNgX
+      agent_session_id: null
+    codebuild:
+      project_name: bedrock-agentcore-strands_workshop_agent-builder
+      execution_role: arn:aws:iam::487498333664:role/AmazonBedrockAgentCoreSDKCodeBuild-us-west-2-a4e6d6200c
+      source_bucket: bedrock-agentcore-codebuild-sources-487498333664-us-west-2
+    memory:
+      mode: NO_MEMORY
+      memory_id: null
+      memory_arn: null
+      memory_name: null
+      event_expiry_days: 30
+      first_invoke_memory_check_done: false
+      was_created_by_toolkit: false
+    identity:
+      credential_providers: []
+      workload: null
+    authorizer_configuration: null
+    request_header_configuration: null
+    oauth_configuration: null
+    api_key_env_var_name: null
+    api_key_credential_provider_name: null
+    is_generated_by_agentcore_create: false
