@@ -2,8 +2,8 @@ import json
 import uuid
 import boto3
 
-agent_arn = "<<배포 시 출력된 Endpoint ARN을 입력하세요>>"
-prompt = "125 * 37은 얼마야?"
+agent_arn = "arn:aws:bedrock-agentcore:us-west-2:654654304740:runtime/strands_workshop_agent-w6Kx9QBoM6"
+prompt = "80 / 4 * 5 의 제곱근은?"
 
 client = boto3.client('bedrock-agentcore')
 
@@ -18,7 +18,21 @@ response = client.invoke_agent_runtime(
 content = []
 for chunk in response.get("response", []):
     content.append(chunk.decode('utf-8'))
-print(json.loads(''.join(content)))
+
+result = json.loads(''.join(content))
+
+print("\n" + "=" * 60)
+print("🤖 Agent Response")
+print("=" * 60 + "\n")
+
+if 'result' in result and 'content' in result['result']:
+    for item in result['result']['content']:
+        if 'text' in item:
+            print(item['text'])
+else:
+    print(json.dumps(result, indent=2, ensure_ascii=False))
+
+print("\n" + "=" * 60 + "\n")
 
 # import json
 # import uuid
