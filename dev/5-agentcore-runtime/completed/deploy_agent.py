@@ -7,8 +7,8 @@ region = boto_session.region_name
 agentcore_runtime = Runtime()
 
 response = agentcore_runtime.configure(
-    entrypoint="my_agent.py",
-    agent_name="strands_workshop_agent",
+    entrypoint="my_agent.py", # or "my_agent_advanced.py"
+    agent_name="strands_workshop_agent", # or "strands_workshop_agent_advanced"
     requirements_file="requirements.txt",
     auto_create_execution_role=True,
     auto_create_ecr=True,
