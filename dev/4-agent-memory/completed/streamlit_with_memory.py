@@ -1,7 +1,6 @@
-"""
-Streamlit 메모리 챗봇 - AgentCore Memory 통합
-"""
 import os
+import json
+import asyncio
 import streamlit as st
 from datetime import datetime
 from strands import Agent
@@ -21,9 +20,8 @@ st.title("🧠 메모리가 있는 챗봇")
 # 환경 변수에서 메모리 ID 가져오기
 MEMORY_ID = os.environ.get("AGENTCORE_MEMORY_ID", "your-memory-id-here")
 
-# 세션 ID 관리 (URL 파라미터 또는 기본값)
+# 세션 ID 초기값 설정 (URL 파라미터 또는 새로 생성)
 if "session_id" not in st.session_state:
-    # URL에서 세션 ID 가져오기 또는 새로 생성
     query_params = st.query_params
     st.session_state.session_id = query_params.get(
         "session", 
@@ -33,7 +31,6 @@ if "session_id" not in st.session_state:
 # 사용자 ID (실제 앱에서는 로그인 시스템과 연동)
 if "actor_id" not in st.session_state:
     st.session_state.actor_id = "default_user"
-
 
 def create_agent_with_memory():
     """메모리가 연결된 에이전트 생성"""
@@ -55,7 +52,6 @@ def create_agent_with_memory():
         session_manager=session_manager
     )
 
-
 # 에이전트 초기화
 if "agent" not in st.session_state:
     st.session_state.agent = create_agent_with_memory()
@@ -63,15 +59,28 @@ if "agent" not in st.session_state:
 # 사이드바
 with st.sidebar:
     st.header("📋 세션 정보")
-    st.text(f"세션 ID: {st.session_state.session_id}")
+    
+    # 세션 ID 직접 입력
+    new_input = st.text_input(
+        "세션 ID",
+        value=st.session_state.session_id,
+        placeholder="세션 ID를 입력하세요",
+        help="기존 세션 ID를 입력하면 해당 대화를 이어갈 수 있습니다."
+    )
+    
+    # 입력값이 변경되면 세션 재연결
+    if new_input and new_input != st.session_state.session_id:
+        st.session_state.session_id = new_input
+        st.session_state.agent = create_agent_with_memory()
+        st.session_state.messages = []
+        st.rerun()
+    
     st.text(f"사용자 ID: {st.session_state.actor_id}")
     
     st.divider()
     
-    # 새 세션 시작 버튼
-    if st.button("🔄 새 세션 시작"):
-        new_session_id = f"chat_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
-        st.session_state.session_id = new_session_id
+    # 입력된 세션 ID로 대화 시작
+    if st.button("💬 대화 시작!"):
         st.session_state.agent = create_agent_with_memory()
         st.session_state.messages = []
         st.rerun()
