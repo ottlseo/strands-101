@@ -7,9 +7,16 @@ aws_docs_mcptool = MCPClient(lambda: stdio_client(
                           args=["awslabs.aws-documentation-mcp-server@latest"]
                           )
 ))
+# 기존 AWS Documentation MCP 아래에 추가
+playwright_mcp_client = MCPClient(lambda: stdio_client(
+    StdioServerParameters(command="npx",
+                          args=["@playwright/mcp@latest"]
+                          )
+))
+
 
 if __name__ == "__main__":
-    user_input = "Amazon Bedrock 가격 모델이란 무엇인가요? 간결하게 설명해 주세요"
+    user_input = "https://aws.amazon.com 페이지를 방문해서 스크린샷을 찍어줘"
 
-    agent = Agent(tools=[aws_docs_mcptool])
+    agent = Agent(tools=[aws_docs_mcptool, playwright_mcp_client])
     response = agent(user_input) 

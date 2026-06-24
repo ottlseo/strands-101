@@ -14,7 +14,7 @@ logging.basicConfig(
 )
 
 model = BedrockModel(
-    model_id="us.anthropic.claude-3-7-sonnet-20250219-v1:0",
+    model_id="us.anthropic.claude-sonnet-4-6",
     max_tokens=64000
 )
 research_agent = Agent(

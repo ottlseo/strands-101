@@ -37,7 +37,7 @@ def product_recommendation_assistant(query: str) -> str:
     """
     try:
         product_agent = Agent(
-            model="us.anthropic.claude-3-7-sonnet-20250219-v1:0",
+            model="us.anthropic.claude-sonnet-4-6",
             system_prompt="""당신은 전문 제품 추천 어시스턴트입니다.
             사용자의 선호도를 바탕으로 개인화된 제품 제안을 제공하세요. 항상 출처를 인용하세요.""",
         )
@@ -59,7 +59,7 @@ def trip_planning_assistant(query: str) -> str:
     """
     try:
         travel_agent = Agent(
-            model="us.anthropic.claude-3-7-sonnet-20250219-v1:0",
+            model="us.anthropic.claude-sonnet-4-6",
             system_prompt="""당신은 전문 여행 계획 어시스턴트입니다.
             사용자의 선호도를 바탕으로 상세한 여행 일정을 작성하세요.""",
         )
