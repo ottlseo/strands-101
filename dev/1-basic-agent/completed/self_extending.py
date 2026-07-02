@@ -42,6 +42,6 @@ agent = Agent(
 )
 
 if __name__ == "__main__":
-    user_input = "16자리 안전한 비밀번호를 생성하는 도구를 만들고, 그 도구로 하나 만들어줘."
+    user_input = "https://strandsagents.com 를 터미널에 QR 코드로 출력하는 도구를 만들고, 그 도구로 QR 코드를 만들어줘."
 
     response = agent(user_input)
