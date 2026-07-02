@@ -22,7 +22,7 @@ def build_system_prompt() -> str:
     return "\n".join(parts)
 
 
-bedrock_model = BedrockModel(model_id="us.anthropic.claude-sonnet-4-20250514-v1:0")
+bedrock_model = BedrockModel(model_id="us.anthropic.claude-sonnet-4-6")
 
 if __name__ == "__main__":
     print("🦆 자가수정 에이전트입니다. 'exit'을 입력하면 종료합니다.\n")

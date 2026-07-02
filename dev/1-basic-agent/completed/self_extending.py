@@ -31,7 +31,7 @@ def my_tool(argument: str) -> str:
 """
 
 bedrock_model = BedrockModel(
-    model_id="us.anthropic.claude-sonnet-4-20250514-v1:0"
+    model_id="us.anthropic.claude-sonnet-4-6"
 )
 
 agent = Agent(
