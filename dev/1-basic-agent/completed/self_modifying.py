@@ -1,3 +1,6 @@
+import os
+os.environ["BYPASS_TOOL_CONSENT"] = "true"  # 도구 실행 시 y/n 확인 프롬프트 비활성화
+
 from pathlib import Path
 from strands import Agent
 from strands.models import BedrockModel
